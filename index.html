@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>روز مادر مبارک ❤️🌹</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@200;400;700&display=swap');
+
+    body {
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+        font-family: "Vazirmatn", sans-serif;
+        background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+    }
+
+    /* پارالاکس */
+    .bg {
+        position: absolute;
+        width: 120%;
+        height: 120%;
+        background: url('https://i.postimg.cc/4d2xvVq6/rose-bg.jpg') center/cover;
+        filter: blur(5px) brightness(0.7);
+        animation: slowMove 20s infinite alternate ease-in-out;
+    }
+
+    @keyframes slowMove {
+        from {transform: scale(1.1) translateY(-20px);}
+        to {transform: scale(1.2) translateY(20px);}
+    }
+
+    /* کارت */
+    .card {
+        position: absolute;
+        z-index: 10;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.9);
+        width: 90%;
+        max-width: 650px;
+        background: rgba(255,255,255,0.25);
+        backdrop-filter: blur(15px);
+        border-radius: 25px;
+        padding: 40px;
+        text-align: center;
+        color: #222;
+        box-shadow: 0 0 40px rgba(255,255,255,0.4);
+        animation: cardIn 1.8s ease forwards;
+        transition: box-shadow 0.1s ease;
+    }
+
+    @keyframes cardIn {
+        from {opacity: 0; transform: translate(-50%, -40%) scale(0.7);}
+        to {opacity: 1; transform: translate(-50%, -50%) scale(1);}
+    }
+
+    /* عنوان براق */
+    h1 {
+        font-size: 2.8rem;
+        background: linear-gradient(90deg, #e6005c, #ff85a2, #e6005c);
+        -webkit-background-clip: text;
+        color: transparent;
+        background-size: 200% auto;
+        animation: shineText 4s linear infinite;
+    }
+
+    @keyframes shineText {
+        0% {background-position: 0%;}
+        100% {background-position: 200%;}
+    }
+
+    p {
+        font-size: 1.3rem;
+        line-height: 2.2rem;
+        color: #333;
+    }
+
+    /* قلب شناور */
+    #heart {
+        font-size: 80px;
+        filter: drop-shadow(0 0 10px red);
+        animation: floatHeart 4s infinite ease-in-out;
+        transition: transform 0.05s ease;
+    }
+
+    @keyframes floatHeart {
+        0% {transform: translateY(0);}
+        50% {transform: translateY(-20px);}
+        100% {transform: translateY(0);}
+    }
+
+    /* دکمه */
+    button {
+        margin-top: 25px;
+        padding: 14px 40px;
+        background: linear-gradient(135deg, #ff4d6d, #ff7597);
+        color: white;
+        font-size: 1.3rem;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    button:hover {transform: scale(1.05);}
+
+    /* گلبرگ‌ها */
+    .petal {
+        position: absolute;
+        top: -10%;
+        font-size: 30px;
+        animation: fall linear infinite;
+        opacity: 0.9;
+    }
+
+    @keyframes fall {
+        0% {transform: translateY(-10%) rotate(0deg);}
+        100% {transform: translateY(120vh) rotate(360deg);}
+    }
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<div class="card" id="card">
+    <div id="heart">❤️</div>
+    <h1>روز مادر مبارک مامان نازنینم 🌹</h1>
+    <p>
+        صدای خنده‌ات زیباترین آهنگ قلب منه.  
+        امیدم، آرامشم، عشقم…  
+        دوستت دارم تا آخرین لحظه زندگی ❤️
+    </p>
+
+    <button onclick="playMusic()">پخش آهنگ</button>
+</div>
+
+<audio id="music" src="Ragheb - Madar [320].mp3"></audio>
+
+<script>
+/* گلبرگ‌ها */
+for(let i = 0; i < 60; i++){
+    let petal = document.createElement("div");
+    petal.classList.add("petal");
+    petal.innerHTML = "🌸";
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.animationDuration = (5 + Math.random()*7) + "s";
+    petal.style.opacity = Math.random();
+    petal.style.fontSize = (20 + Math.random()*25) + "px";
+    document.body.appendChild(petal);
+}
+
+/* Beat Sync — هماهنگ با ضرب */
+let ctx, src, analyser;
+function playMusic() {
+    const audio = document.getElementById("music");
+    const heart = document.getElementById("heart");
+    const card = document.getElementById("card");
+
+    audio.play();
+
+    if (!ctx) {
+        ctx = new (window.AudioContext || window.webkitAudioContext)();
+        src = ctx.createMediaElementSource(audio);
+        analyser = ctx.createAnalyser();
+
+        src.connect(analyser);
+        analyser.connect(ctx.destination);
+        analyser.fftSize = 256;
+    }
+
+    let data = new Uint8Array(analyser.frequencyBinCount);
+
+    function beatLoop() {
+        requestAnimationFrame(beatLoop);
+        analyser.getByteFrequencyData(data);
+
+        let bass = data[2] + data[3] + data[4]; // ناحیه ضرب
+        if (bass > 210) { // ضرب قوی
+            heart.style.transform = "scale(1.35)";
+            card.style.boxShadow = "0 0 40px rgba(255,0,80,0.8)";
+        } else {
+            heart.style.transform = "scale(1)";
+            card.style.boxShadow = "0 0 20px rgba(255,255,255,0.4)";
+        }
+    }
+
+    beatLoop();
+}
+</script>
+
+</body>
+</html>
