@@ -15,7 +15,7 @@
         background: #000;
     }
 
-    /* پس‌زمینه موج RGB */
+    /* موج RGB */
     .rgb-wave {
         position: absolute;
         width: 100%;
@@ -34,15 +34,15 @@
         100% {transform: rotate(360deg);}
     }
 
-    /* پارالاکس گل */
+    /* پس‌زمینه رز 3D (جدید و بدون خطا) */
     .bg {
         position: absolute;
         width: 130%;
         height: 130%;
-        background: url('https://i.postimg.cc/4d2xvVq6/rose-bg.jpg') center/cover;
-        filter: blur(4px) brightness(0.6);
+        background: url('https://images.pexels.com/photos/102129/pexels-photo-102129.jpeg') center/cover;
+        filter: blur(4px) brightness(0.55);
         animation: slowMove 20s infinite alternate ease-in-out;
-        opacity: 0.5;
+        opacity: 0.7;
     }
 
     @keyframes slowMove {
@@ -89,7 +89,7 @@
         100% {transform: translateY(0);}
     }
 
-    /* متن عنوان */
+    /* عنوان */
     h1 {
         font-size: 2.7rem;
         background: linear-gradient(90deg, #ff6e99, #ffacd2, #ff6e99);
@@ -138,13 +138,12 @@
         100% {transform: translateY(120vh) rotate(360deg);}
     }
 
-    /* امضا */
     .signature {
         position: absolute;
-        bottom: 10px;
+        bottom: 12px;
         width: 100%;
         text-align: center;
-        color: #fff8;
+        color: #ffffff99;
         font-size: 1.1rem;
         letter-spacing: 2px;
     }
@@ -162,9 +161,9 @@
     <h1>روز مادر مبارک مامان عزیزم 🌹</h1>
 
     <p>
-        تو آهنگ آرامش منی…  
-        ضرب قلبم با عشق تو می‌تپه…  
-        همیشه بخند، همیشه سالم باش ❤️
+        تو زیباترین گل زندگی منی…  
+        قلبم با عشق تو می‌تپه،  
+        همیشه بخند مامانم ❤️
     </p>
 
     <button onclick="playMusic()">پخش آهنگ</button>
@@ -175,7 +174,7 @@
 <audio id="music" src="Ragheb - Madar [320].mp3"></audio>
 
 <script>
-/* بارش گلبرگ */
+/* گلبرگ */
 for(let i = 0; i < 60; i++){
     let p = document.createElement("div");
     p.classList.add("petal");
@@ -187,7 +186,7 @@ for(let i = 0; i < 60; i++){
     document.body.appendChild(p);
 }
 
-/* Beat Sync حرفه‌ای */
+/* Beat Sync */
 let ctx, src, analyser;
 
 function playMusic() {
@@ -217,12 +216,10 @@ function playMusic() {
         let bass = data[1] + data[2] + data[3] + data[4];
 
         if (bass > 200) {
-            /* ضرب قوی */
             heart.style.transform = "scale(1.45)";
             card.style.boxShadow = "0 0 65px rgba(255,0,90,0.9)";
             rgb.style.opacity = 0.55;
         } else {
-            /* حالت عادی */
             heart.style.transform = "scale(1)";
             card.style.boxShadow = "0 0 35px rgba(255,255,255,0.35)";
             rgb.style.opacity = 0.35;
