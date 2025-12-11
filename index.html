@@ -12,17 +12,37 @@
         height: 100vh;
         overflow: hidden;
         font-family: "Vazirmatn", sans-serif;
-        background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+        background: #000;
     }
 
-    /* پارالاکس */
+    /* پس‌زمینه موج RGB */
+    .rgb-wave {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at center,
+        rgba(255,0,120,0.4),
+        rgba(0,150,255,0.4),
+        rgba(0,255,180,0.4));
+        filter: blur(120px);
+        animation: rgbSpin 10s linear infinite;
+        opacity: 0.35;
+    }
+
+    @keyframes rgbSpin {
+        0% {transform: rotate(0deg);}
+        100% {transform: rotate(360deg);}
+    }
+
+    /* پارالاکس گل */
     .bg {
         position: absolute;
-        width: 120%;
-        height: 120%;
+        width: 130%;
+        height: 130%;
         background: url('https://i.postimg.cc/4d2xvVq6/rose-bg.jpg') center/cover;
-        filter: blur(5px) brightness(0.7);
+        filter: blur(4px) brightness(0.6);
         animation: slowMove 20s infinite alternate ease-in-out;
+        opacity: 0.5;
     }
 
     @keyframes slowMove {
@@ -30,7 +50,7 @@
         to {transform: scale(1.2) translateY(20px);}
     }
 
-    /* کارت */
+    /* کارت اصلی */
     .card {
         position: absolute;
         z-index: 10;
@@ -39,13 +59,13 @@
         transform: translate(-50%, -50%) scale(0.9);
         width: 90%;
         max-width: 650px;
-        background: rgba(255,255,255,0.25);
-        backdrop-filter: blur(15px);
+        background: rgba(255,255,255,0.15);
+        backdrop-filter: blur(20px);
         border-radius: 25px;
-        padding: 40px;
+        padding: 45px;
         text-align: center;
-        color: #222;
-        box-shadow: 0 0 40px rgba(255,255,255,0.4);
+        color: #fff;
+        box-shadow: 0 0 45px rgba(255,255,255,0.3);
         animation: cardIn 1.8s ease forwards;
         transition: box-shadow 0.1s ease;
     }
@@ -55,10 +75,24 @@
         to {opacity: 1; transform: translate(-50%, -50%) scale(1);}
     }
 
-    /* عنوان براق */
+    /* قلب */
+    #heart {
+        font-size: 85px;
+        filter: drop-shadow(0 0 12px red);
+        animation: floatHeart 4s infinite ease-in-out;
+        transition: transform 0.06s ease;
+    }
+
+    @keyframes floatHeart {
+        0% {transform: translateY(0);}
+        50% {transform: translateY(-20px);}
+        100% {transform: translateY(0);}
+    }
+
+    /* متن عنوان */
     h1 {
-        font-size: 2.8rem;
-        background: linear-gradient(90deg, #e6005c, #ff85a2, #e6005c);
+        font-size: 2.7rem;
+        background: linear-gradient(90deg, #ff6e99, #ffacd2, #ff6e99);
         -webkit-background-clip: text;
         color: transparent;
         background-size: 200% auto;
@@ -71,29 +105,15 @@
     }
 
     p {
-        font-size: 1.3rem;
-        line-height: 2.2rem;
-        color: #333;
-    }
-
-    /* قلب شناور */
-    #heart {
-        font-size: 80px;
-        filter: drop-shadow(0 0 10px red);
-        animation: floatHeart 4s infinite ease-in-out;
-        transition: transform 0.05s ease;
-    }
-
-    @keyframes floatHeart {
-        0% {transform: translateY(0);}
-        50% {transform: translateY(-20px);}
-        100% {transform: translateY(0);}
+        font-size: 1.4rem;
+        color: #eee;
+        line-height: 2.3rem;
     }
 
     /* دکمه */
     button {
         margin-top: 25px;
-        padding: 14px 40px;
+        padding: 15px 45px;
         background: linear-gradient(135deg, #ff4d6d, #ff7597);
         color: white;
         font-size: 1.3rem;
@@ -104,11 +124,11 @@
     }
     button:hover {transform: scale(1.05);}
 
-    /* گلبرگ‌ها */
+    /* گلبرگ */
     .petal {
         position: absolute;
         top: -10%;
-        font-size: 30px;
+        font-size: 32px;
         animation: fall linear infinite;
         opacity: 0.9;
     }
@@ -117,46 +137,64 @@
         0% {transform: translateY(-10%) rotate(0deg);}
         100% {transform: translateY(120vh) rotate(360deg);}
     }
+
+    /* امضا */
+    .signature {
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+        text-align: center;
+        color: #fff8;
+        font-size: 1.1rem;
+        letter-spacing: 2px;
+    }
 </style>
 </head>
 
 <body>
 
+<div class="rgb-wave" id="rgb"></div>
 <div class="bg"></div>
 
 <div class="card" id="card">
     <div id="heart">❤️</div>
-    <h1>روز مادر مبارک مامان نازنینم 🌹</h1>
+
+    <h1>روز مادر مبارک مامان عزیزم 🌹</h1>
+
     <p>
-        صدای خنده‌ات زیباترین آهنگ قلب منه.  
-        امیدم، آرامشم، عشقم…  
-        دوستت دارم تا آخرین لحظه زندگی ❤️
+        تو آهنگ آرامش منی…  
+        ضرب قلبم با عشق تو می‌تپه…  
+        همیشه بخند، همیشه سالم باش ❤️
     </p>
 
     <button onclick="playMusic()">پخش آهنگ</button>
 </div>
 
+<div class="signature">Create by A&R</div>
+
 <audio id="music" src="Ragheb - Madar [320].mp3"></audio>
 
 <script>
-/* گلبرگ‌ها */
+/* بارش گلبرگ */
 for(let i = 0; i < 60; i++){
-    let petal = document.createElement("div");
-    petal.classList.add("petal");
-    petal.innerHTML = "🌸";
-    petal.style.left = Math.random() * 100 + "vw";
-    petal.style.animationDuration = (5 + Math.random()*7) + "s";
-    petal.style.opacity = Math.random();
-    petal.style.fontSize = (20 + Math.random()*25) + "px";
-    document.body.appendChild(petal);
+    let p = document.createElement("div");
+    p.classList.add("petal");
+    p.innerHTML = "🌸";
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.animationDuration = (5 + Math.random()*7) + "s";
+    p.style.fontSize = (25 + Math.random()*20) + "px";
+    p.style.opacity = (0.6 + Math.random()*0.4);
+    document.body.appendChild(p);
 }
 
-/* Beat Sync — هماهنگ با ضرب */
+/* Beat Sync حرفه‌ای */
 let ctx, src, analyser;
+
 function playMusic() {
     const audio = document.getElementById("music");
     const heart = document.getElementById("heart");
     const card = document.getElementById("card");
+    const rgb = document.getElementById("rgb");
 
     audio.play();
 
@@ -176,13 +214,18 @@ function playMusic() {
         requestAnimationFrame(beatLoop);
         analyser.getByteFrequencyData(data);
 
-        let bass = data[2] + data[3] + data[4]; // ناحیه ضرب
-        if (bass > 210) { // ضرب قوی
-            heart.style.transform = "scale(1.35)";
-            card.style.boxShadow = "0 0 40px rgba(255,0,80,0.8)";
+        let bass = data[1] + data[2] + data[3] + data[4];
+
+        if (bass > 200) {
+            /* ضرب قوی */
+            heart.style.transform = "scale(1.45)";
+            card.style.boxShadow = "0 0 65px rgba(255,0,90,0.9)";
+            rgb.style.opacity = 0.55;
         } else {
+            /* حالت عادی */
             heart.style.transform = "scale(1)";
-            card.style.boxShadow = "0 0 20px rgba(255,255,255,0.4)";
+            card.style.boxShadow = "0 0 35px rgba(255,255,255,0.35)";
+            rgb.style.opacity = 0.35;
         }
     }
 
